@@ -9,7 +9,7 @@ const app = express();
 
 // DB Setup
 // go connect with instance of mongodb - this creates a database inside mongodb called auth
-mongoose.connect('mongodb://localhost:auth/auth');
+mongoose.connect('mongodb://localhost/auth');
 
 // App setup
 
