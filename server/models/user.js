@@ -37,6 +37,18 @@ userSchema.pre('save', function(next) {
     })
 })
 
+// it basically says whenever we create a user object, it's going to have access to any functions that we defined in methods property
+// we add instance method called comparePassword. candidatePassword - the password the user types in. 
+userSchema.methods.comparePassword = function(candidatePassword, callback) {
+    // this refers to user model. So this.password is our hash and salted password
+    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+        if (err) {
+            return callback(Err);
+        }
+        callback(null, isMatch);
+    })
+}
+
 // Create the model class - load the schema to mongoose and get it back to modelClass with collection as user - class of users.
 const ModelClass = mongoose.model('user', userSchema);
 
